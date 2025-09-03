@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Gacha de la Comunidad</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #89f7fe, #66a6ff);
+        text-align: center;
+        padding: 50px;
+    }
+    h1 {
+        color: #fff;
+        text-shadow: 2px 2px 5px #000;
+    }
+    button {
+        padding: 15px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 10px;
+        background-color: #ffcc00;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: transform 0.2s;
+    }
+    button:hover {
+        transform: scale(1.1);
+    }
+    #resultado {
+        margin-top: 30px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 1px 1px 3px #000;
+    }
+</style>
+</head>
+<body>
+<h1>¡Gacha de la Comunidad!</h1>
+<p>Haz clic en el botón para probar suerte y ganar tu premio.</p>
+<button onclick="tirarGacha()">¡Probar suerte!</button>
+<div id="resultado"></div>
+
+<script>
+function tirarGacha() {
+    const premios = [
+        "50 Amino Coins (Común)", 
+        "100 Amino Coins (No común)", 
+        "Nickname estético personalizado (Raro)", 
+        "Icon de perfil personalizado (Legendario)", 
+        "Prismático (500 Amino Coins)", 
+        "Título personalizado (Divino)"
+    ];
+
+    // Probabilidades ajustadas: aumentadas para todos excepto Divino
+    const probabilidades = [0.40, 0.25, 0.15, 0.10, 0.09, 0.01];
+
+    let randomNum = Math.random();
+    let acumulado = 0;
+    let premioGanado = "";
+
+    for (let i = 0; i < premios.length; i++) {
+        acumulado += probabilidades[i];
+        if (randomNum <= acumulado) {
+            premioGanado = premios[i];
+            break;
+        }
+    }
+
+    const mensaje = `🎉 ¡Felicidades! Haz ganado ${premioGanado}. Ve al privado de algún líder a reclamar tu premio, no olvides tomar captura.`;
+    document.getElementById("resultado").innerText = mensaje;
+}
+</script>
+</body>
+</html>
